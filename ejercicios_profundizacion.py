@@ -57,7 +57,10 @@ def ej1():
         suma = sum(lista_numeros)
     
         if  suma <= 21:
-            lista_recolectados = [x for x in lista_numeros if suma <= 21]
+            # Inove: En este caso se est copiando tal cual lista_numeros a lista_recolectados
+            # en caso de ser necesario lista_recolectados se puede generar directamente como:
+            # lista_recolectados = lista_numeros
+            lista_recolectados = [x for x in lista_numeros if suma <= 21] 
             print('Suma:', sum(lista_recolectados), ', de la lista:', lista_recolectados)
             break
             
@@ -90,6 +93,12 @@ def ej2():
 
 
     nombres_filtrados = [x for x in nombres if x[0] == padron[0] or x[0] == padron[1] or x[0] == padron[2] or x[0] == padron[3]]
+    
+    # Inove: Una opción para no tener que probar contra todos los elementos de la lista si este elemento se encuentra
+    # incluido es utilizar el operador "in". El operador "in" se utilizar para entender si un elemento se encuentra
+    # contenido dentro de otro (en este caso si la primera letra del nombre se encuentra incluida entre las del padron
+    # nombres_filtrados = [x for x in nombres if (x[0] in padron)]
+    
        
     print(nombres_filtrados)
 
@@ -159,6 +168,8 @@ def ej4():
     lista_compra =  [x if x in producto else 'NaN' for x in lista_compra_id] #ESTA ME DA LAS CLAVES Y REEMPLAZA CON NAN LOS QUE NO ESTAN EN DICT
 
     lista_compra_productos1 = [producto.get(x, 'NaN') for x in lista_compra_id] #ESTA ES LA APROPIADA
+    
+    # Inove: Exacto! la ltima es la apropiada
     
     print(lista_compra_productos)
     print(lista_compra)
