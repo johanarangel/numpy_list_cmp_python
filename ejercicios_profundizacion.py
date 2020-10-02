@@ -16,6 +16,15 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
 import numpy as np
+import random
+import math
+import re
+
+
+lista_jugador1 = []
+lista_jugador2 = []
+suma_jugador1 = []
+suma_jugador2 = []
 
 
 def ej1():
@@ -41,6 +50,19 @@ def ej1():
 
     Realizar este proceso iterativo hasta cumplir el objetivo
     '''
+    
+    lista_numeros = [random.randint(1, 11) for x in range(3)]
+    
+    while True:
+        suma = sum(lista_numeros)
+    
+        if  suma <= 21:
+            lista_recolectados = [x for x in lista_numeros if suma <= 21]
+            print('Suma:', sum(lista_recolectados), ', de la lista:', lista_recolectados)
+            break
+            
+        elif suma > 21:
+            lista_numeros = [random.randint(1, 11) for x in range(3)]
 
 
 def ej2():
@@ -51,11 +73,13 @@ def ej2():
     obtener una nueva lista filtrada que llamaremos "nombres_filtrados"
     La lista se debe filtrar por comprensión de listas utilizando la
     lista "padron" como parámetro.
-    La lista filtrada sodo deberá tener aquellos nombres que empiecen
+    La lista filtrada solo deberá tener aquellos nombres que empiecen
     con alguna de las letras aceptadas en el "padron".
     '''
 
     padron = ['A', 'E', 'J', 'T']
+
+    
 
     nombres = ['Tamara', 'Marcelo', 'Martin', 'Juan', 'Alberto', 'Exequiel',
                'Alejandro', 'Leonel', 'Antonio', 'Omar', 'Antonia', 'Amalia',
@@ -64,6 +88,10 @@ def ej2():
     # Se espera obtener:
     # ['Tamara', 'Juan', 'Alberto'......]
 
+
+    nombres_filtrados = [x for x in nombres if x[0] == padron[0] or x[0] == padron[1] or x[0] == padron[2] or x[0] == padron[3]]
+       
+    print(nombres_filtrados)
 
 def ej3():
     print("Un poco de Numpy!")
@@ -80,7 +108,8 @@ def ej3():
     # NO utilizar comprensión de listas, solo utilice la
     # funcion de numpy "np.sin"
 
-    # y_nump =
+    y_nump = np.sin(x)
+    #print(y_nump)
 
     # Conjunto de valores "X" en una lista
     x = list(np.arange(0, 2*np.pi, 0.1))
@@ -88,8 +117,9 @@ def ej3():
     # Utilizar comprensión de listas para obtener la lista
     # "y_list" que tenga todos los valores obtenidos como resultado
     # de someter cada valor de "X" a la función math.sin
-
-    # y_list =
+    
+    y_list = [math.sin(valor) for valor in x]
+    print(y_list)
 
     # Este es un ejemplo práctico de cuando es útil usar numpy,
     # basicamente siempre que deseen utilizar una función matemática
@@ -112,9 +142,9 @@ def ej4():
                 }
 
     lista_compra_id = [556070, 905045, 42135, 5674, 704060, 1264, 42135, 3654]
-
+       
     # Crear una nueva lista "lista_compra_productos" que transforme la lista
-    # de realizada por "ID" de producto en lista por "nombre" producto
+    # realizada por "ID" de producto en lista por "nombre" producto
     # Iterar sobre la lista "lista_compra_id" para generar la nueva
     # En cada iteración acceder al diccionario para traducir el ID.
     # NOTA: Tener en cuenta que puede haber códigos (IDs) que
@@ -122,8 +152,28 @@ def ej4():
     # almacenar en la lista la palabra 'NaN', para ello puede hacer uso
     # de condicionales PERO recomendamos leer atentamente el método "get"
     # de diccionarios que tiene un parametro configurable respecto
-    # que sucede sino encuentra la "key" en el diccionario.
+    # que sucede sino encuentra la "key" en el diccionario.     
 
+    lista_compra_productos = list(map(producto.get, lista_compra_id))
+    
+    lista_compra =  [x if x in producto else 'NaN' for x in lista_compra_id]
+    
+    print(lista_compra_productos)
+    print(lista_compra)
+    
+    
+def evaluar(jugador, persona):
+    
+    if jugador == 0:
+        pass
+    
+    else:
+        if jugador >= 21:
+            print(persona, 'superaste los 21 puntos con:', jugador, 'puntos')
+
+        elif jugador < 21:
+            print(persona, 'tiene acumulados', jugador, 'puntos')    
+     
 
 def ej5():
     print("Ahora sí! buena suerte :)")
@@ -147,12 +197,151 @@ def ej5():
     dos jugadores y compitan para ver quien sacá la suma de números
     más cercanos a 21 sin pasarse!
     '''
+    contador = 0
 
+    try:
+        print('Bienvenido al juego Black Jack')
+        print('Cuántos jugadores jugaran?')
+        print('Ingrese 1, para un jugador:\n Ingrese 2, para dos jugadores:\n Ingrese 3, para salir')
+        jugadores = int(input())
+    
+    except ValueError:
+        print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
+        print('Bienvenido al juego Black Jack')
+        print('Cuántos jugadores jugaran?')
+        print('Ingrese 1, para un jugador:\n Ingrese 2, para dos jugadores:\n Ingrese 3, para salir')
+        jugadores = int(input())
+    
+    
+    if jugadores == 1:
+        
+        try:
+            print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+            consulta = str(input())
+        except:
+            print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
+            print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+            consulta = str(input())
+          
+        while consulta:
+            
+            if consulta == 'JUGAR':   
+                jugador1 = [random.randint(1, 11) for x in range(2)]
+                suma1 = sum(jugador1)
+                lista_jugador1.append(jugador1)             
+                suma_jugador1.append(suma1)
+                contador += 1
+                                    
+                print('Intento:', contador,'. Resultados:', jugador1)
+                evaluar(jugador= sum(suma_jugador1), persona= 'jugador1')
+                
+                #--------------PARA SABER SI SUPERA LOS 21 PUNTOS Y TERMINA LA JUGADA--------                
+                if sum(suma_jugador1) >= 21 or consulta == 'SALIR':
+                    print('Termina la jugada')
+                    print('Resultados en puntaje:', sum(suma_jugador1))
+                    break
+                
+                try:
+                    print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+                    consulta = str(input())
+                
+                except:
+                    print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
+                    print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+                    consulta = str(input())
 
+            elif consulta == 'SALIR':
+                break
+
+            else:
+                print('Los valores ingresados no corresponden, intente nuevamente')
+                try:
+                    print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+                    consulta = str(input())
+                except:
+                    print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
+                    print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+                    consulta = str(input())
+
+    elif jugadores == 2:
+        print('Escriba "JUGAR", para sacar números:\n Ingrese "SALIR", para no sacar más números:')
+        consulta = str(input())
+
+        while consulta:
+            
+            if consulta == 'JUGAR':       
+                jugador1 = [random.randint(1, 11) for x in range(2)]
+                jugador2 = [random.randint(1, 11) for x in range(2)]
+                lista_jugador1.append(jugador1)
+                lista_jugador2.append(jugador2)
+                suma1 = sum(jugador1) 
+                suma2 = sum(jugador2)              
+                suma_jugador1.append(suma1)              
+                suma_jugador2.append(suma2)
+                contador += 1
+
+                print('Intento:', contador,'. Resultados:', jugador1)
+                print('Intento:', contador,'. Resultados:', jugador2)                
+                evaluar(jugador= sum(suma_jugador1), persona= 'jugador1')
+                evaluar(jugador= sum(suma_jugador2), persona= 'jugador2')
+                
+                if sum(jugador1) == 0 and sum(suma_jugador2) == 0:
+                    pass 
+        
+                elif sum(jugador1) == sum(suma_jugador2):
+                    print('Quedaron con igual puntaje, jugador1', sum(suma_jugador1),'jugador2', sum(suma_jugador2))
+                        
+                #--------------PARA SABER SI SUPERA LOS 21 PUNTOS Y TERMINA LA JUGADA--------
+
+                elif (sum(suma_jugador1) >= 21 and sum(suma_jugador1) > sum(suma_jugador2)) or consulta == 'SALIR':
+                    print('Termina la jugada')
+                    print('Gana la jugada el jugador1 con un puntaje total de:', sum(suma_jugador1), 'puntos de:', jugador1)
+                    break
+
+                elif (sum(suma_jugador2) >= 21 and sum(suma_jugador2) > sum(suma_jugador1)) or consulta == 'SALIR':
+                    print('Termina la jugada')
+                    print('Gana la jugada el jugador2 con un puntaje total de:', sum(suma_jugador2), 'puntos de:', jugador2)
+                    break
+                
+                #--------------------PARA CONTINUAR EL JUEGO EN CASO NO HAYA SUPERADO LOS 21 PUNTOS-----
+
+                print('Escriba "JUGAR", para sacar números y jugar otra vez:\n Escriba "SALIR", para no sacar más números:')
+                consulta = str(input())
+
+            elif consulta == 'SALIR':
+                break
+
+            else:
+                print('Los valores ingresados no corresponden, intente nuevamente')
+                print('Escriba "JUGAR", para sacar números y jugar otra vez:\n Escriba "SALIR", para no sacar más números:')
+                consulta = str(input())
+        
+    elif jugadores == 3:
+        print('Ha salido del programa')
+    
+    else:
+        print('Los valores ingresados no corresponden con los indicados, intente nuevamente.')
+        try:
+            print('Cuántos jugadores jugaran?')
+            print('Ingrese 1, para un jugador:\n Ingrese 2, para dos jugadores:\n Ingrese 3, para salir')
+            jugadores = int(input())
+        
+        except ValueError:
+            print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
+            print('Cuántos jugadores jugaran?')
+            print('Ingrese 1, para un jugador:\n Ingrese 2, para dos jugadores:\n Ingrese 3, para salir')
+            jugadores = int(input())
+
+                  
 if __name__ == '__main__':
     print("Ejercicios de práctica")
-    # ej1()
-    # ej2()
-    # ej3()
-    # ej4()
+    #ej1()
+    #ej2()
+    #ej3()
+    ej4()
+    # jugador = int()
+    # lista_jugador = list()
+    # persona = ''
+    # evaluar(jugador, persona)
     # ej5()
+    
