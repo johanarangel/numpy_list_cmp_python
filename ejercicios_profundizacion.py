@@ -154,12 +154,15 @@ def ej4():
     # de diccionarios que tiene un parametro configurable respecto
     # que sucede sino encuentra la "key" en el diccionario.     
 
-    lista_compra_productos = list(map(producto.get, lista_compra_id))
+    lista_compra_productos = list(map(producto.get, lista_compra_id)) #SOLO ME DA LOS VALORES Y LOS QUE NO ESTAN EN EL DICT LO REEMPLAZA CON NONE
     
-    lista_compra =  [x if x in producto else 'NaN' for x in lista_compra_id]
+    lista_compra =  [x if x in producto else 'NaN' for x in lista_compra_id] #ESTA ME DA LAS CLAVES Y REEMPLAZA CON NAN LOS QUE NO ESTAN EN DICT
+
+    lista_compra_productos1 = [producto.get(x, 'NaN') for x in lista_compra_id] #ESTA ES LA APROPIADA
     
     print(lista_compra_productos)
     print(lista_compra)
+    print(lista_compra_productos1)
     
     
 def evaluar(jugador, persona):

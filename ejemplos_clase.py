@@ -331,12 +331,12 @@ if __name__ == '__main__':
     # ----------------------------
     # Uso de Numpy vs bucles vs listas
     # queda para que el alumno chusmee
-    metodos_numpy_vs_list()
-    numpy_where_diff()
+    #metodos_numpy_vs_list()
+    #  numpy_where_diff()
     # ----------------------------
-    expresion_map_lambda()
-    lambda_vs_bucle()
-    comprension_listas()
-    comprension_listas_vs_bucle()
+    # expresion_map_lambda()
+    # lambda_vs_bucle()
+    # comprension_listas()
+    #comprension_listas_vs_bucle()
     # Bonus Track - comprension listas + diccionarios
     comprension_dataset()
