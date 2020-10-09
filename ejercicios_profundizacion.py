@@ -89,7 +89,7 @@ def ej2():
     # ['Tamara', 'Juan', 'Alberto'......]
 
 
-    nombres_filtrados = [x for x in nombres if x[0] == padron[0] or x[0] == padron[1] or x[0] == padron[2] or x[0] == padron[3]]
+    nombres_filtrados = [x for x in nombres if x[0] in padron]
        
     print(nombres_filtrados)
 
